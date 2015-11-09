@@ -3,10 +3,11 @@
 
 ## Build
  1. 安装各种依赖 `npm install` 和 `bower install`
- 2. 完成
- 
- 
+ 2. 编译 `grunt build`
+ 3. 完成
+
+
 ## Usage
  - 启动服务 `grunt serve`
- - 编译代码 `grunt build`
- 
+ - 生产环境下用这个 `grunt build`
+
