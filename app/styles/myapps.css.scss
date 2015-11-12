@@ -35,13 +35,19 @@ section.myapps {
       }
     }
     .app-info {
+      // 这里 overflow: hidden, safari 有问题, chrome, firefox 没问题, 为什么呢? BFC?
+      // overflow: hidden;
+
       height: 50 / $default-vw2px * 1vw;
       padding: 7 / $default-vw2px * 1vw 0;
       margin-left: 23.373984%;
-      overflow: hidden;
     }
     .app-name {
       font-size: 16 / $default-vw2px * 1vw;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .app-version, .app-size {
       color: #aaa;
