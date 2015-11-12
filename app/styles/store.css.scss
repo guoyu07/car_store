@@ -10,10 +10,6 @@
 $default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
-body.store {
-  background-color: #1a2424;
-}
-
 /* # 应用市场主页 */
 main.store-home {
   width: 90%;
@@ -43,8 +39,16 @@ main.store-home {
         opacity: .6;
       }
     }
-    .app-logo img {
-      width: 100%;
+    .app-logo {
+      $app-logo-size: 84 / $default-vw2px * 1vw;
+
+      width: $app-logo-size;
+      height: $app-logo-size;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
     }
     .app-name, .app-size {
       color: #fff;

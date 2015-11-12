@@ -12,10 +12,13 @@ body {
   -webkit-font-smoothing: antialiased;
   font: normal 0.625rem "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 62.5%;
+
+  color: #fff;
+  background-color: #1a2424;
 }
 
 a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }

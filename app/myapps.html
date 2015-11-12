@@ -12,9 +12,10 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:css(.tmp) styles/store.css -->
-    <!-- <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/store.css"> -->
+    <!-- build:css(.tmp) styles/style.css -->
+    <!-- 此处引入的样式文件并不会被 grunt 编译, 仅仅替换为 style.css -->
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/myapps.css">
     <!-- endbuild -->
 
     <!-- build:js(.) scripts/vendor/modernizr.js -->
@@ -22,59 +23,21 @@
     <!-- endbuild -->
 
   </head>
-  <body class="store">
+  <body>
 
-    <header></header>
-
-    <main class="store-home">
-      <section>
-        <h1>全部应用</h1>
-        <ul class="store-apps">
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app1.png"></div>
-              <div class="app-name">支付宝</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app2.png"></div>
-              <div class="app-name">微信</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app3.png"></div>
-              <div class="app-name">某某FM - 就放了多久福建省来得及</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app1.png"></div>
-              <div class="app-name">支付宝</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app2.png"></div>
-              <div class="app-name">微信</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div class="app-logo"><img src="images/test/app3.png"></div>
-              <div class="app-name">某某FM - 就放了多久福建省来得及</div>
-              <div class="app-size">12.9 M</div>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </main>
+    <section class="myapps">
+      <ul class="myapps-apps">
+        <li>
+          <div class="app-logo"><img src="images/test/app1.png"></div>
+          <div class="app-info">
+            <div class="app-name">高德地图</div>
+            <div class="app-version">版本 1.0</div>
+            <div class="app-size">12.9 M</div>
+          </div>
+          <div class="app-operate"><a href="#">卸载</a></div>
+        </li>
+      </ul>
+    </section>
 
     <!-- build:js(.) scripts/vendor.js -->
     <script src="bower_components/requirejs/require.js"></script>
