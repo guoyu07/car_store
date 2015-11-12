@@ -1,0 +1,145 @@
+
+// orange theme
+$orange: #ffa600;
+
+// aqua theme
+$aqua: #0ca;
+
+// blue theme
+$blue: #08c;
+
+// springgreen theme
+$springgreen: #0c6;
+
+// current theme
+$TNAME: $orange;
+$THEME: lighten($TNAME, 0%);
+$THEME-LIGHT: lighten($TNAME, 5%);
+$THEME-DARK: darken($TNAME, 5%);
+$THEME-DARKER: darken($TNAME, 10%);
+
+
+// common color
+$dark-gray: #707070;
+$medium-gray: #909090;
+$light-gray: #f1f1f1;
+
+$font-darker-gray: rgba(30,30,30,0.5);
+
+$BORDER_COLOR: #d9d9d9;
+
+// 资讯文章正文颜色
+$article-content-color: rgba(0,0,0,0.87);
+
+// 进度条
+$nprogress-color: $THEME-LIGHT;
+
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+
+
+$default-font-size: 16px !default;
+
+// strip unit
+@function strip-unit($val) {
+  @return $val / ($val * 0 + 1);
+}
+
+// pixels to rems
+@function px2rem($px) {
+  @return $px / $default-font-size * 1rem;
+}
+// convert rem
+// @include rem(margin, 1, .5);
+@mixin rem($property, $values...) {
+  $length: length($values);
+  $px_values: '';
+  $rem_values: '';
+
+  @for $i from 1 through $length {
+    // get value without unit
+    $value: strip-unit(nth($values, $i));
+    $font_size: strip-unit($default-font-size);
+    $px_values: #{$px_values + $value * $font_size}px;
+
+    @if $i < $length {
+      $px_values: #{$px_values + ' '};
+    }
+  }
+
+  @for $i from 1 through $length {
+    $value: strip-unit(nth($values, $i));
+    $rem_values: #{$rem_values + $value}rem;
+
+    @if $i < $length {
+      $rem_values: #{$rem_values + ' '};
+    }
+  }
+
+  #{$property}: $px_values;
+  #{$property}: $rem_values;
+}
+
+// px to em
+@function px2em($target, $context: $default-font-size) {
+  // exist unit or not
+  @if not unitless($target) {
+    $target: strip-unit($target);
+  }
+  @if not unitless($context) {
+    $context: strip-unit($context);
+  }
+  @return ($target / $context) * 1em;
+}
+// @include px2em(line-height, 30, 16);
+// @include px2em(width height, 100px);
+// @include px2em(text-shadow, (#fff 1 1) (#777 0 0 2), 16);
+// @include px2em(box-shadow, (inset 0 0 0 1 #fff) (inset 0 0 3 #777), 16);
+@mixin px2em($props, $values, $context: $default-font-size) {
+  $list: ();
+  $sublist: false;
+
+  @each $value in $values {
+    @if type-of($value) == list {
+      $sublist: true;
+      $item: ();
+      @each $target in $value {
+        $item: append($item, if(type-of($target) == number, #{$target / $context}em, $target));
+      }
+      $list: append($list, join((), $item));
+    }
+    @else {
+      $target: $value;
+      $list: append($list, if(type-of($target) == number, #{$target / $context}em, $target));
+    }
+  }
+  $values: join((), $list, if($sublist, comma, space));
+  @each $prop in $props {
+    #{$prop}: $values;
+  }
+}
+
+@mixin clearfix {
+  // @if $legacy-support-for-ie {
+  //   *zoom: 1;
+  // }
+  &:before, &:after {
+    content: '';
+    display: table;
+    font: 0/0 'a';
+  }
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+%clearfix { @include clearfix; }
+
+@mixin transparent-color($color, $background) {
+  $percent: alpha($color) * 100%;
+  $opaque: opacify($color, 1);
+
+  background-color: mix($opaque, $background, $percent);
+  background-color: $color;
+}

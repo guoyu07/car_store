@@ -1,0 +1,66 @@
+
+@import "support";
+
+/*
+ * TOC
+ *
+ * 1 应用市场主页
+ */
+
+$default-font-size: 10px;
+$default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
+
+body.store {
+  background-color: #1a2424;
+}
+
+/* # 应用市场主页 */
+main.store-home {
+  width: 90%;
+  margin: 0 auto;
+
+  // 应用列表标题
+  section > h1 {
+    color: #fff;
+    line-height: 1;
+    font-size: 18 / $default-vw2px * 1vw;
+    // font-size: px2em(18px, $default-font-size);
+
+    margin-top: px2em(19px, 18px);
+    margin-bottom: px2em(21px, 18px);
+    margin-left: 3.333333333333%;
+  }
+
+  ul.store-apps {
+    li {
+      width: 26%;
+      line-height: 1;
+      font-size: 10 / $default-vw2px * 1vw;
+      margin: 0 3.333333333333% px2em(21px, 10px);
+      display: inline-block;
+
+      a:active .app-logo {
+        opacity: .6;
+      }
+    }
+    .app-logo img {
+      width: 100%;
+    }
+    .app-name, .app-size {
+      color: #fff;
+      margin-left: 6px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .app-name {
+      margin-top: px2em(9px, 14px);
+      margin-bottom: px2em(6px, 14px);
+      font-size: 14 / $default-vw2px * 1vw;
+    }
+    .app-size {
+      font-size: 11 / $default-vw2px * 1vw;
+    }
+  }
+}
