@@ -7,7 +7,10 @@
  * 1 我的应用
  */
 
+$default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
+
+$app-list-padding: 48 / 1080 * 100%;
 
 /* # 我的应用 */
 section.myapps {
@@ -17,7 +20,7 @@ section.myapps {
       line-height: 1;
       border-bottom: 1px solid #313a3a;
       display: block;
-      padding: 4.44444444%;
+      padding: $app-list-padding;
     }
     .app-logo {
       $app-logo-size: 64 / $default-vw2px * 1vw;
@@ -34,13 +37,15 @@ section.myapps {
         height: 100%;
       }
     }
+
     .app-info {
       // 这里 overflow: hidden, safari 有问题, chrome, firefox 没问题, 为什么呢? BFC?
       // overflow: hidden;
 
-      height: 50 / $default-vw2px * 1vw;
+      height: 50 / $default-vw2px * 1vw; // 这里高度不能百分比布局, 只能相对视窗大小
       padding: 7 / $default-vw2px * 1vw 0;
-      margin-left: 23.373984%;
+      margin-left: (190 + 40) / 984 * 100%;
+      margin-right: 140 / 984 * 100%;
     }
     .app-name {
       font-size: 16 / $default-vw2px * 1vw;
@@ -55,8 +60,29 @@ section.myapps {
       font-size: 12 / $default-vw2px * 1vw;
     }
     .app-operate {
-      top: 0;
+      $app-operate-height: px2em(25px, $default-font-size);
+
+      top: 50%;
+      right: $app-list-padding;
       position: absolute;
+
+      text-align: center;
+      font-size: 10 / $default-vw2px * 1vw;
+
+      width: 140 / 1080 * 100%;
+      height: $app-operate-height;
+      line-height: $app-operate-height;
+      margin-top: - $app-operate-height / 2;
+
+      border: 1px solid #fff;
+      border-radius: px2em(5px, $default-font-size);
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: block;
+        font-size: 14 / $default-vw2px * 1vw;
+      }
     }
   }
 }
