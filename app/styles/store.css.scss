@@ -142,7 +142,7 @@ $app-info-padding: 48 / 1080 * 100%;
 
   section.store-app-screenshots {
     overflow: scroll;
-    height: 118 / $default-vw2px * 1vw;
+    min-height: 118 / $default-vw2px * 1vw;
     padding: $app-info-padding;
     border-top: 1px solid #313a3a;
 
@@ -152,7 +152,7 @@ $app-info-padding: 48 / 1080 * 100%;
       white-space: nowrap;
 
       li {
-        width: 640 / 984 * 100%;
+        width: 836 / 984 * 100%;
         margin-right: 36 / 984 * 100%;
         display: inline-block;
       }
@@ -163,6 +163,26 @@ $app-info-padding: 48 / 1080 * 100%;
     }
   }
   section.store-app-intro {
+    padding: $app-info-padding;
     border-top: 1px solid #313a3a;
+
+    h1 {
+      color: #aaa;
+      font-size: 14 / $default-vw2px * 1vw;
+      margin-bottom: px2em(16px, 14px);
+    }
+    .content {
+      line-height: 1.8em;
+      margin-top: -0.3em;
+      color: rgba(255, 255, 255, .9);
+      font-size: 12 / $default-vw2px * 1vw;
+
+      a {
+        font-size: inherit;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+    }
   }
 }
