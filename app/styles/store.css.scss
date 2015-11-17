@@ -11,7 +11,7 @@ $default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
 /* # 应用市场主页 */
-main.store-home {
+.store-home {
   width: 90%;
   margin: 0 auto;
 
@@ -66,5 +66,103 @@ main.store-home {
     .app-size {
       font-size: 11 / $default-vw2px * 1vw;
     }
+  }
+}
+
+/* # 应用详情页 */
+
+$app-info-padding: 48 / 1080 * 100%;
+
+.store-app {
+  .store-app-info {
+    position: relative;
+    line-height: 1;
+    display: block;
+    padding: $app-info-padding;
+  }
+  .app-logo {
+    $app-logo-size: 89 / $default-vw2px * 1vw;
+
+    width: $app-logo-size;
+    height: $app-logo-size;
+    border-radius: 10 / $default-vw2px * 1vw;
+
+    float: left;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .app-info {
+    height: 50 / $default-vw2px * 1vw;
+    padding: 20 / $default-vw2px * 1vw 0;
+    margin-left: (268 + 48) / 984 * 100%;
+    margin-right: 140 / 984 * 100%;
+  }
+  .app-name {
+    font-size: 16 / $default-vw2px * 1vw;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .app-version, .app-size {
+    color: #aaa;
+    margin-top: px2em(5px, 12px);
+    font-size: 12 / $default-vw2px * 1vw;
+  }
+  .app-operate {
+    $app-operate-height: px2em(25px, $default-font-size);
+
+    top: 50%;
+    right: $app-info-padding;
+    position: absolute;
+
+    text-align: center;
+    font-size: 10 / $default-vw2px * 1vw;
+
+    width: 140 / 1080 * 100%;
+    height: $app-operate-height;
+    line-height: $app-operate-height;
+    margin-top: - $app-operate-height / 2;
+
+    border: 1px solid #fff;
+    border-radius: px2em(5px, $default-font-size);
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      font-size: 14 / $default-vw2px * 1vw;
+    }
+  }
+
+  section.store-app-screenshots {
+    overflow: scroll;
+    height: 118 / $default-vw2px * 1vw;
+    padding: $app-info-padding;
+    border-top: 1px solid #313a3a;
+
+    ul {
+      list-style: none;
+      font-size: 0px;
+      white-space: nowrap;
+
+      li {
+        width: 640 / 984 * 100%;
+        margin-right: 36 / 984 * 100%;
+        display: inline-block;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  section.store-app-intro {
+    border-top: 1px solid #313a3a;
   }
 }
