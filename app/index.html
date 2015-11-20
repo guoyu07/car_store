@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/style.css -->
     <!-- 默认配置中 grunt 只编译 index.html 引入的样式文件, 所以此处必须引入所有待编译的样式文件 -->
     <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/plugins/flexslider.css">
     <link rel="stylesheet" href="styles/store.css">
     <link rel="stylesheet" href="styles/myapps.css">
     <!-- endbuild -->
@@ -27,7 +28,22 @@
   <body class="store">
 
     <header>
-      
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <img src="slide1.jpg" />
+          </li>
+          <li>
+            <img src="slide2.jpg" />
+          </li>
+          <li>
+            <img src="slide3.jpg" />
+          </li>
+          <li>
+            <img src="slide4.jpg" />
+          </li>
+        </ul>
+      </div>
     </header>
 
     <main class="store-home">
