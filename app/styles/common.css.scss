@@ -3,6 +3,7 @@
 
 @import "support";
 
+$default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
 * {
@@ -32,8 +33,6 @@ a {
   width: 100%;
   position: fixed;
   background-color: rgba(0,0,0,.8);
-
-  display: none;
 }
 
 /* # 提示 */
@@ -61,6 +60,7 @@ a {
   ul.app2sinan {
     font-size: 0px;
     white-space: nowrap;
+    height: 89px; /* COMPATIBLE CODE */
     height: 89 / $default-vw2px * 1vw;
 
     li {
@@ -85,8 +85,11 @@ a {
   }
   .content {
     line-height: 1.5em;
+    margin-top: px2em(27px, 16px); /* COMPATIBLE CODE */
+    margin-bottom: px2em(24px, 16px); /* COMPATIBLE CODE */
     margin-top: 27 / $default-vw2px * 1vw;
     margin-bottom: 24 / $default-vw2px * 1vw;
+    font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
     font-size: 16 / $default-vw2px * 1vw;
   }
   .operate {
@@ -102,6 +105,7 @@ a {
 
       text-align: center;
       display: inline-block;
+      font-size: px2em($operate-font-size * 1px, $default-font-size); /* COMPATIBLE CODE */
       font-size: $operate-font-size / $default-vw2px * 1vw;
 
       border: 1px solid #fff;
