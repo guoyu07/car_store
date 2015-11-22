@@ -10,6 +10,30 @@
 $default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
+/* # 主页焦点图 */
+.store-banner {
+  overflow: hidden;
+  height: 240 / $default-vw2px * 1vw;
+
+  // 改插件样式
+  .flex-control-nav {
+    height: 10px;
+    bottom: 0px;
+    background-color: rgba(255,255,255, .1);
+  }
+  .flex-control-paging li a {
+    height: 100%;
+    box-shadow: none;
+    border-radius: initial;
+    background-color: transparent;
+    pointer-events: none;
+
+    &.flex-active {
+      background-color: rgba(255,255,255, .9);
+    }
+  }
+}
+
 /* # 应用市场主页 */
 .store-home {
   width: 90%;
@@ -83,6 +107,7 @@ $app-info-padding: 48 / 1080 * 100%;
   .app-logo {
     $app-logo-size: 89 / $default-vw2px * 1vw;
 
+    width: 268 / 984 * 100%; /* COMPATIBLE CODE */
     width: $app-logo-size;
     height: $app-logo-size;
     border-radius: 10 / $default-vw2px * 1vw;
@@ -92,17 +117,19 @@ $app-info-padding: 48 / 1080 * 100%;
 
     img {
       width: 100%;
-      height: 100%;
+      // height: 100%;
     }
   }
 
   .app-info {
     height: 50 / $default-vw2px * 1vw;
+    padding: px2em(20px, $default-font-size) 0; /* COMPATIBLE CODE */
     padding: 20 / $default-vw2px * 1vw 0;
     margin-left: (268 + 48) / 984 * 100%;
     margin-right: 140 / 984 * 100%;
   }
   .app-name {
+    font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
     font-size: 16 / $default-vw2px * 1vw;
 
     white-space: nowrap;
@@ -112,6 +139,7 @@ $app-info-padding: 48 / 1080 * 100%;
   .app-version, .app-size {
     color: #aaa;
     margin-top: px2em(5px, 12px);
+    font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
     font-size: 12 / $default-vw2px * 1vw;
   }
   .app-operate {
@@ -136,12 +164,14 @@ $app-info-padding: 48 / 1080 * 100%;
       width: 100%;
       height: 100%;
       display: block;
+      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 14 / $default-vw2px * 1vw;
     }
   }
 
   section.store-app-screenshots {
     overflow: scroll;
+    min-height: px2em(118px, $default-font-size); /* COMPATIBLE CODE */
     min-height: 118 / $default-vw2px * 1vw;
     padding: $app-info-padding;
     border-top: 1px solid #313a3a;
@@ -158,7 +188,7 @@ $app-info-padding: 48 / 1080 * 100%;
       }
       img {
         width: 100%;
-        height: 100%;
+        // height: 100%;
       }
     }
   }
@@ -168,6 +198,7 @@ $app-info-padding: 48 / 1080 * 100%;
 
     h1 {
       color: #aaa;
+      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 14 / $default-vw2px * 1vw;
       margin-bottom: px2em(16px, 14px);
     }
@@ -175,6 +206,7 @@ $app-info-padding: 48 / 1080 * 100%;
       line-height: 1.8em;
       margin-top: -0.3em;
       color: rgba(255, 255, 255, .9);
+      font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 12 / $default-vw2px * 1vw;
 
       a {
