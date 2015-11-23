@@ -9,8 +9,9 @@ define(['flexslider'], function(){
     animationSpeed: 300,
     slideshowSpeed: 5000,
     slideshow: true, // 是否自动播放
-    init: function() {
-      console.log(111)
+    start: function(slider) {
+      var w = (1 / slider.count * 100) + '%';
+      slider.find('.flex-control-nav li').width(w);
     }
   });
 
