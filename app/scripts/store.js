@@ -5,13 +5,14 @@ define(['flexslider'], function(){
   $('#banner').flexslider({
     animation: 'slide',
     easing: 'ease',
+    controlNav: false,
     directionNav: false,
-    animationSpeed: 300,
+    animationSpeed: 250,
     slideshowSpeed: 5000,
     slideshow: true, // 是否自动播放
     start: function(slider) {
-      var w = (1 / slider.count * 100) + '%';
-      slider.find('.flex-control-nav li').width(w);
+      // var w = (1 / slider.count * 100) + '%';
+      // slider.find('.flex-control-nav li').width(w);
     }
   });
 

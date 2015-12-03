@@ -10,11 +10,20 @@
 $default-font-size: 10px;
 $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
+$app-list-padding: 48 / 1080 * 100%;
+
+body.store-home {
+  background-color: #252527;
+}
+
 /* # 主页焦点图 */
 .store-banner {
   overflow: hidden;
   height: 240 / $default-vw2px * 1vw;
 
+  &.flexslider {
+    margin: 0;
+  }
   // 改插件样式
   .flex-control-nav {
     height: 6px;
@@ -47,59 +56,108 @@ $default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
 
 /* # 应用市场主页 */
 .store-home {
-  width: 90%;
   margin: 0 auto;
 
   // 应用列表标题
   section > h1 {
     color: #fff;
     line-height: 1;
-    font-size: 18 / $default-vw2px * 1vw;
-    // font-size: px2em(18px, $default-font-size);
+    font-size: 16 / $default-vw2px * 1vw;
+    // font-size: px2em(16px, $default-font-size);
 
-    margin-top: px2em(19px, 18px);
-    margin-bottom: px2em(21px, 18px);
-    margin-left: 3.333333333333%;
+    padding: px2em(16px, 16px) $app-list-padding;
+    background-color: #1c1c1f;
   }
 
   ul.store-apps {
     li {
-      width: 26%;
+      position: relative;
       line-height: 1;
-      font-size: 10 / $default-vw2px * 1vw;
-      margin: 0 3.333333333333% px2em(21px, 10px);
-      display: inline-block;
-
-      a:active .app-logo {
-        opacity: .6;
-      }
+      border-bottom: 1px solid #515152;
+      display: block;
+      padding: $app-list-padding;
     }
     .app-logo {
-      $app-logo-size: 84 / $default-vw2px * 1vw;
+      $app-logo-size: (174 / 3) / $default-vw2px * 1vw;
 
+      width: 174 / 984 * 100%; /* COMPATIBLE CODE */
       width: $app-logo-size;
       height: $app-logo-size;
+      border-radius: 10 / $default-vw2px * 1vw;
+
+      float: left;
       overflow: hidden;
 
       img {
         width: 100%;
+        height: 100%;
       }
     }
-    .app-name, .app-size {
-      color: #fff;
-      margin-left: 6px;
+
+    .app-info {
+      // 这里 overflow: hidden, safari 有问题, chrome, firefox 没问题, 为什么呢? BFC?
+      // overflow: hidden;
+
+      height: 35 / $default-vw2px * 1vw; // 这里高度不能百分比布局, 只能相对视窗大小
+      padding: px2em(11px, $default-font-size) 0; /* COMPATIBLE CODE */
+      padding: 11 / $default-vw2px * 1vw 0;
+      margin-left: (174 + 40) / 984 * 100%;
+      margin-right: (150 + 30) / 984 * 100%;
+    }
+    .app-name {
+      font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: 16 / $default-vw2px * 1vw;
 
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .app-name {
-      margin-top: px2em(9px, 14px);
-      margin-bottom: px2em(6px, 14px);
-      font-size: 14 / $default-vw2px * 1vw;
+    .app-summary {
+      $font-size: 12;
+
+      color: #aaa;
+
+      font-size: px2em($font-size * 1px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: $font-size / $default-vw2px * 1vw;
+
+      margin-top: px2em(7px, $font-size * 1px);
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-    .app-size {
-      font-size: 11 / $default-vw2px * 1vw;
+
+    .app-operate {
+      $app-operate-height: px2em(30px, $default-font-size);
+
+      top: 50%;
+      right: $app-list-padding;
+      position: absolute;
+
+      text-align: center;
+      font-size: 10 / $default-vw2px * 1vw;
+
+      width: 150 / 1080 * 100%;
+      height: $app-operate-height;
+      line-height: $app-operate-height;
+      margin-top: - $app-operate-height / 2;
+
+      overflow: hidden;
+      // border: 1px solid #fff;
+      border-radius: px2em(3px, $default-font-size);
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: #1affff;
+        font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
+        font-size: 14 / $default-vw2px * 1vw;
+
+        &:active {
+          background-color: #3b3b3d;
+        }
+      }
     }
   }
 }
@@ -116,9 +174,9 @@ $app-info-padding: 48 / 1080 * 100%;
     padding: $app-info-padding;
   }
   .app-logo {
-    $app-logo-size: 89 / $default-vw2px * 1vw;
+    $app-logo-size: (230 / 3) / $default-vw2px * 1vw;
 
-    width: 268 / 984 * 100%; /* COMPATIBLE CODE */
+    width: 230 / 984 * 100%; /* COMPATIBLE CODE */
     width: $app-logo-size;
     height: $app-logo-size;
     border-radius: 10 / $default-vw2px * 1vw;
@@ -133,26 +191,35 @@ $app-info-padding: 48 / 1080 * 100%;
   }
 
   .app-info {
-    height: 50 / $default-vw2px * 1vw;
-    padding: px2em(20px, $default-font-size) 0; /* COMPATIBLE CODE */
-    padding: 20 / $default-vw2px * 1vw 0;
-    margin-left: (268 + 48) / 984 * 100%;
-    margin-right: 140 / 984 * 100%;
+    height: 57 / $default-vw2px * 1vw;
+    padding: px2em(10px, $default-font-size) 0; /* COMPATIBLE CODE */
+    padding: 10 / $default-vw2px * 1vw 0;
+    margin-left: (230 + 48) / 984 * 100%;
+    margin-right: 150 / 984 * 100%;
   }
   .app-name {
-    font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
-    font-size: 16 / $default-vw2px * 1vw;
+    font-size: px2em(18px, $default-font-size); /* COMPATIBLE CODE */
+    font-size: 18 / $default-vw2px * 1vw;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  $font-size: 12; // 版本、应用大小的字体
   .app-version, .app-size {
     color: #aaa;
-    margin-top: px2em(5px, 12px);
-    font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
-    font-size: 12 / $default-vw2px * 1vw;
+
+    font-size: px2em($font-size * 1px, $default-font-size); /* COMPATIBLE CODE */
+    font-size: $font-size / $default-vw2px * 1vw;
   }
+  .app-version {
+    margin-top: px2em(9px, $font-size * 1px);
+  }
+  .app-size {
+    margin-top: px2em(6px, $font-size * 1px);
+  }
+
   .app-operate {
     $app-operate-height: px2em(25px, $default-font-size);
 
@@ -163,27 +230,32 @@ $app-info-padding: 48 / 1080 * 100%;
     text-align: center;
     font-size: 10 / $default-vw2px * 1vw;
 
-    width: 140 / 1080 * 100%;
+    width: 150 / 1080 * 100%;
     height: $app-operate-height;
     line-height: $app-operate-height;
     margin-top: - $app-operate-height / 2;
 
-    border: 1px solid #fff;
-    border-radius: px2em(5px, $default-font-size);
+    // border: 1px solid #fff;
+    // border-radius: px2em(5px, $default-font-size);
 
     a {
       width: 100%;
       height: 100%;
       display: block;
+      color: #1affff;
       font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 14 / $default-vw2px * 1vw;
+
+      &:active {
+        color: #fff;
+      }
     }
   }
 
   section.store-app-screenshots {
     overflow: scroll;
-    min-height: px2em(118px, $default-font-size); /* COMPATIBLE CODE */
-    min-height: 118 / $default-vw2px * 1vw;
+    min-height: px2em((520 / 3 * 1px), $default-font-size); /* COMPATIBLE CODE */
+    min-height: (520 / 3) / $default-vw2px * 1vw;
     padding: $app-info-padding;
     border-top: 1px solid #313a3a;
 
@@ -193,8 +265,8 @@ $app-info-padding: 48 / 1080 * 100%;
       white-space: nowrap;
 
       li {
-        width: 836 / 984 * 100%;
-        margin-right: 36 / 984 * 100%;
+        width: 936 / 984 * 100%;
+        margin-right: 20 / 984 * 100%;
         display: inline-block;
       }
       img {
@@ -208,23 +280,23 @@ $app-info-padding: 48 / 1080 * 100%;
     border-top: 1px solid #313a3a;
 
     h1 {
-      color: #aaa;
-      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
-      font-size: 14 / $default-vw2px * 1vw;
-      margin-bottom: px2em(16px, 14px);
-    }
-    .content {
-      line-height: 1.8em;
-      margin-top: -0.3em;
-      color: rgba(255, 255, 255, .9);
+      color: #aaaaab;
       font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 12 / $default-vw2px * 1vw;
+      margin-bottom: px2em(11px, 12px);
+    }
+    .content {
+      line-height: px2em(21px, 14px);
+      margin-top: -0.3em;
+      color: rgba(255, 255, 255, .9);
+      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: 14 / $default-vw2px * 1vw;
 
       a {
         font-size: inherit;
       }
       p {
-        margin-bottom: 1em;
+        margin-bottom: .5em;
       }
     }
   }

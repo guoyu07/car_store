@@ -23,9 +23,9 @@ section.myapps {
       padding: $app-list-padding;
     }
     .app-logo {
-      $app-logo-size: 64 / $default-vw2px * 1vw;
+      $app-logo-size: (174 / 3) / $default-vw2px * 1vw;
 
-      width: 190 / 984 * 100%; /* COMPATIBLE CODE */
+      width: 174 / 984 * 100%; /* COMPATIBLE CODE */
       width: $app-logo-size;
       height: $app-logo-size;
       border-radius: 10 / $default-vw2px * 1vw;
@@ -43,11 +43,11 @@ section.myapps {
       // 这里 overflow: hidden, safari 有问题, chrome, firefox 没问题, 为什么呢? BFC?
       // overflow: hidden;
 
-      height: 50 / $default-vw2px * 1vw; // 这里高度不能百分比布局, 只能相对视窗大小
-      padding: px2em(7px, $default-font-size) 0; /* COMPATIBLE CODE */
-      padding: 7 / $default-vw2px * 1vw 0;
-      margin-left: (190 + 40) / 984 * 100%;
-      margin-right: 140 / 984 * 100%;
+      height: 53 / $default-vw2px * 1vw; // 这里高度不能百分比布局, 只能相对视窗大小
+      padding-top: px2em(2px, $default-font-size); /* COMPATIBLE CODE */
+      padding-top: 2 / $default-vw2px * 1vw;
+      margin-left: (174 + 40) / 984 * 100%;
+      margin-right: 150 / 984 * 100%;
     }
     .app-name {
       font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
@@ -57,12 +57,21 @@ section.myapps {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    $font-size: 12; // 版本、应用大小的字体
     .app-version, .app-size {
       color: #aaa;
-      margin-top: px2em(5px, 12px);
-      font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
-      font-size: 12 / $default-vw2px * 1vw;
+
+      font-size: px2em($font-size * 1px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: $font-size / $default-vw2px * 1vw;
     }
+    .app-version {
+      margin-top: px2em(7px, $font-size * 1px);
+    }
+    .app-size {
+      margin-top: px2em(6px, $font-size * 1px);
+    }
+
     .app-operate {
       $app-operate-height: px2em(25px, $default-font-size);
 
@@ -73,20 +82,25 @@ section.myapps {
       text-align: center;
       font-size: 10 / $default-vw2px * 1vw;
 
-      width: 140 / 1080 * 100%;
+      width: 150 / 1080 * 100%;
       height: $app-operate-height;
       line-height: $app-operate-height;
       margin-top: - $app-operate-height / 2;
 
-      border: 1px solid #fff;
-      border-radius: px2em(5px, $default-font-size);
+      // border: 1px solid #fff;
+      // border-radius: px2em(5px, $default-font-size);
 
       a {
         width: 100%;
         height: 100%;
         display: block;
+        color: #1affff;
         font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
         font-size: 14 / $default-vw2px * 1vw;
+
+        &:active {
+          color: #fff;
+        }
       }
     }
   }

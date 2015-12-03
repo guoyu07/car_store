@@ -1,0 +1,234 @@
+
+@import "support";
+
+/*
+ * TOC
+ *
+ * 1 应用市场主页
+ */
+
+$default-font-size: 10px;
+$default-vw2px: 360 * 0.01; // 默认以屏幕宽度 360 像素计算
+
+/* # 主页焦点图 */
+.store-banner {
+  overflow: hidden;
+  height: 240 / $default-vw2px * 1vw;
+
+  &.flexslider {
+    margin: 0;
+  }
+  // 改插件样式
+  .flex-control-nav {
+    height: 6px;
+    bottom: 0px;
+    background-color: rgba(255,255,255, .1);
+  }
+  .flex-control-paging li {
+    margin: 0;
+
+    a {
+      width: 100%;
+      height: 100%;
+      box-shadow: none;
+      border-radius: initial;
+      background-color: transparent;
+      pointer-events: none;
+
+      -webkit-transition: background-color .4s;
+         -moz-transition: background-color .4s;
+          -ms-transition: background-color .4s;
+           -o-transition: background-color .4s;
+              transition: background-color .4s;
+
+      &.flex-active {
+        background-color: rgba(255,255,255, .7);
+      }
+    }
+  }
+}
+
+/* # 应用市场主页 */
+.store-home {
+  width: 90%;
+  margin: 0 auto;
+
+  // 应用列表标题
+  section > h1 {
+    color: #fff;
+    line-height: 1;
+    font-size: 16 / $default-vw2px * 1vw;
+    // font-size: px2em(16px, $default-font-size);
+
+    margin-top: px2em(19px, 16px);
+    margin-bottom: px2em(21px, 16px);
+    margin-left: 3.333333333333%;
+  }
+
+  ul.store-apps {
+    li {
+      width: 26%;
+      line-height: 1;
+      font-size: 10 / $default-vw2px * 1vw;
+      margin: 0 3.333333333333% px2em(21px, 10px);
+      display: inline-block;
+
+      a:active .app-logo {
+        opacity: .6;
+      }
+    }
+    .app-logo {
+      $app-logo-size: 84 / $default-vw2px * 1vw;
+
+      width: $app-logo-size;
+      height: $app-logo-size;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+    .app-name, .app-size {
+      color: #fff;
+      margin-left: 6px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .app-name {
+      margin-top: px2em(9px, 14px);
+      margin-bottom: px2em(6px, 14px);
+      font-size: 14 / $default-vw2px * 1vw;
+    }
+    .app-size {
+      font-size: 11 / $default-vw2px * 1vw;
+    }
+  }
+}
+
+/* # 应用详情页 */
+
+$app-info-padding: 48 / 1080 * 100%;
+
+.store-app {
+  .store-app-info {
+    position: relative;
+    line-height: 1;
+    display: block;
+    padding: $app-info-padding;
+  }
+  .app-logo {
+    $app-logo-size: 89 / $default-vw2px * 1vw;
+
+    width: 268 / 984 * 100%; /* COMPATIBLE CODE */
+    width: $app-logo-size;
+    height: $app-logo-size;
+    border-radius: 10 / $default-vw2px * 1vw;
+
+    float: left;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      // height: 100%;
+    }
+  }
+
+  .app-info {
+    height: 50 / $default-vw2px * 1vw;
+    padding: px2em(20px, $default-font-size) 0; /* COMPATIBLE CODE */
+    padding: 20 / $default-vw2px * 1vw 0;
+    margin-left: (268 + 48) / 984 * 100%;
+    margin-right: 140 / 984 * 100%;
+  }
+  .app-name {
+    font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
+    font-size: 16 / $default-vw2px * 1vw;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .app-version, .app-size {
+    color: #aaa;
+    margin-top: px2em(5px, 12px);
+    font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
+    font-size: 12 / $default-vw2px * 1vw;
+  }
+  .app-operate {
+    $app-operate-height: px2em(25px, $default-font-size);
+
+    top: 50%;
+    right: $app-info-padding;
+    position: absolute;
+
+    text-align: center;
+    font-size: 10 / $default-vw2px * 1vw;
+
+    width: 140 / 1080 * 100%;
+    height: $app-operate-height;
+    line-height: $app-operate-height;
+    margin-top: - $app-operate-height / 2;
+
+    border: 1px solid #fff;
+    border-radius: px2em(5px, $default-font-size);
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: 14 / $default-vw2px * 1vw;
+    }
+  }
+
+  section.store-app-screenshots {
+    overflow: scroll;
+    min-height: px2em(118px, $default-font-size); /* COMPATIBLE CODE */
+    min-height: 118 / $default-vw2px * 1vw;
+    padding: $app-info-padding;
+    border-top: 1px solid #313a3a;
+
+    ul {
+      list-style: none;
+      font-size: 0px;
+      white-space: nowrap;
+
+      li {
+        width: 836 / 984 * 100%;
+        margin-right: 36 / 984 * 100%;
+        display: inline-block;
+      }
+      img {
+        width: 100%;
+        // height: 100%;
+      }
+    }
+  }
+  section.store-app-intro {
+    padding: $app-info-padding;
+    border-top: 1px solid #313a3a;
+
+    h1 {
+      color: #aaa;
+      font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: 14 / $default-vw2px * 1vw;
+      margin-bottom: px2em(16px, 14px);
+    }
+    .content {
+      line-height: 1.8em;
+      margin-top: -0.3em;
+      color: rgba(255, 255, 255, .9);
+      font-size: px2em(12px, $default-font-size); /* COMPATIBLE CODE */
+      font-size: 12 / $default-vw2px * 1vw;
+
+      a {
+        font-size: inherit;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}

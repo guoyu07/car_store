@@ -28,6 +28,7 @@ a {
 
 // 遮罩
 .mask {
+  display: none;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -42,8 +43,8 @@ a {
   left: 0;
   margin: auto;
   position: absolute;
-  width: 700 / 1080 * 100%;
-  padding: (140 / 2) / 1080 * 100%;
+  width: 690 / 1080 * 100%;
+  padding: (80 / 1080 * 100%) (77 / 1080 * 100%);
 
   border-radius: 5px;
   background-color: #2e3333;
@@ -60,8 +61,8 @@ a {
   ul.app2sinan {
     font-size: 0px;
     white-space: nowrap;
-    height: 89px; /* COMPATIBLE CODE */
-    height: 89 / $default-vw2px * 1vw;
+    height: 230 / 3 * 1px; /* COMPATIBLE CODE */
+    height: (230 / 3) / $default-vw2px * 1vw;
 
     li {
       height: 100%;
@@ -71,11 +72,11 @@ a {
       background-repeat: no-repeat;
     }
     li.left, li.right {
-      width: 270 / 700 * 100%;
+      width: 230 / 690 * 100%;
       background-size: contain;
     }
     li.middle {
-      width: 160 / 700 * 100%;
+      width: 230 / 690 * 100%;
       background-size: 45%;
       background-image: url(../images/test/arrow_forward.png);
     }
@@ -85,10 +86,10 @@ a {
   }
   .content {
     line-height: 1.5em;
-    margin-top: px2em(27px, 16px); /* COMPATIBLE CODE */
-    margin-bottom: px2em(24px, 16px); /* COMPATIBLE CODE */
-    margin-top: 27 / $default-vw2px * 1vw;
-    margin-bottom: 24 / $default-vw2px * 1vw;
+    margin-top: px2em(21px, 16px); /* COMPATIBLE CODE */
+    margin-bottom: px2em(5px, 16px); /* COMPATIBLE CODE */
+    margin-top: 21 / $default-vw2px * 1vw;
+    margin-bottom: 5 / $default-vw2px * 1vw;
     font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
     font-size: 16 / $default-vw2px * 1vw;
   }
@@ -99,17 +100,18 @@ a {
       $operate-font-size: 14;
       $operate-height: px2em(25px, $operate-font-size * 1px);
 
-      width: 140 / 700 * 100%;
-      height: $operate-height;
-      line-height: $operate-height;
+      // width: 140 / 700 * 100%;
+      // height: $operate-height;
+      // line-height: $operate-height;
 
       text-align: center;
       display: inline-block;
+      color: #1affff;
       font-size: px2em($operate-font-size * 1px, $default-font-size); /* COMPATIBLE CODE */
       font-size: $operate-font-size / $default-vw2px * 1vw;
 
-      border: 1px solid #fff;
-      border-radius: px2em(5px, $operate-font-size * 1px);
+      // border: 1px solid #fff;
+      // border-radius: px2em(5px, $operate-font-size * 1px);
     }
   }
 }
