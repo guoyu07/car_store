@@ -1,5 +1,5 @@
 
-define(['flexslider'], function(){
+define(['storeApi', 'flexslider'], function(storeApi){
 
   // 应用市场主页焦点图
   $('#banner').flexslider({
@@ -22,4 +22,7 @@ define(['flexslider'], function(){
     //     console.log('wo shi module')
     // }
     // return Zombie;
+
+    console.log(storeApi.getAllWares())
+
 })
