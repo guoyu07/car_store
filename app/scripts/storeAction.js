@@ -5,7 +5,7 @@ define(function(require, exports, module) {
     /*
      * 处理安装动作
      */
-    installAction: function() {console.log(112233)
+    installAction: function() {
       var target = $(event.target);
       var meta = target.parents('.app-meta');
 
@@ -15,7 +15,7 @@ define(function(require, exports, module) {
         var status = meta.data('status');
 
         if(status === false) { // 表示未安装应用
-
+          meta.data('status', true);
 
           // 改变按钮状态 循环依赖解决方案
           require('storeUI').updateOperateState(target);

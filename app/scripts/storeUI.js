@@ -123,16 +123,21 @@ define(['const', 'storeAction'], function($const, storeAction) {
      * 更新 安装与卸载按钮的状态
      */
     updateOperateState: function(button) {
-      if(button.hasClass('install')) {
-        button.text('已安装');
-        button.addClass('installed');
-        button.removeClass('install');
-      }
-      else if(button.hasClass('installed')) {
-        button.text('安装');
-        button.addClass('install');
-        button.removeClass('installed');
-      }
+      // 时间限制在 300 ~ 1300
+      var millisec = Math.round(Math.random() * 1000 + 300);
+
+      setTimeout(function() {
+        if(button.hasClass('install')) {
+          button.text('已安装')
+            .addClass('installed')
+            .removeClass('install');
+        }
+        else if(button.hasClass('installed')) {
+          button.text('安装')
+            .addClass('install')
+            .removeClass('installed');
+        }
+      }, millisec);
     }
   }
 });
