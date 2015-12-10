@@ -81,6 +81,8 @@ button {
     li.left, li.right {
       width: 230 / 690 * 100%;
       background-size: contain;
+
+      border-radius: 10 / $default-vw2px * 1vw;
     }
     li.middle {
       width: 230 / 690 * 100%;

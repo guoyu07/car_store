@@ -45,7 +45,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
     /*
      * 我的应用列表 UI
      */
-    renderMyAppList: function(data) {
+    renderMyAppList: function(data) {console.log(data)
       var myAppList = $('#myAppList');
 
       if(data && data.length) {
@@ -135,13 +135,20 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var mask = $('#mask');
 
       var msgHTML = '<div class="msg"><ul class="app2sinan">' +
-        '<li class="left" style="background-image:url(images/test/app1.png)"></li>' +
+        '<li class="left" style="background-image:url(' + message.logo + ')"></li>' +
           '<li class="middle"></li>' +
           '<li class="right"></li>' +
         '</ul>' +
-        '<div class="content">支付宝 将会很快就运到您的司南盒子上！</div>' +
-        '<div class="operate"><a href="#">好的</a></div>' +
+        '<div class="content">' + message.content + '</div>' +
+        '<div class="operate"><a href="javascript:void(0);" class="close">好的</a></div>' +
       '</div>';
+
+      mask.html(msgHTML).show();
+
+      // 关闭弹框
+      mask.find('.close').click(function() {
+        mask.hide();
+      });
     },
 
     /*

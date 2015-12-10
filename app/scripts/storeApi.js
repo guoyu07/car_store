@@ -120,9 +120,19 @@ define(['const'], function($const) {
     /*
      * 安装应用
      */
-    setup: function() {
-
-
+    setup: function(appId) {
+      return $.ajax({
+        url: server + '/api/v1/wares.json',
+        type: 'post',
+        dataType: 'json',
+        data: {
+          'sn': sn,
+          'id': appId,
+        },
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        }
+      });
     }
   };
 });
