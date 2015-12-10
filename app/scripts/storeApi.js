@@ -5,7 +5,7 @@ define(['const'], function($const) {
   var server1 = 'http://172.16.10.91:8080';
 
   var sn = '8469e2920a239a83192eff5313abab82';
-  var access_token = 'aa508d450639a670294e650d37f666be049afbee35018c5c86615015ddde3772';
+  var access_token = 'fa72344b4bb409e04fc795353113cb1fd4f01c9a3099140f091fec0eada9e63d';
 
   return {
     /*
@@ -40,7 +40,7 @@ define(['const'], function($const) {
      * 获得应用列表
      */
     getAppList: function() {
-
+      /*
       $.ajax({
         url: server1 + '/Sinan/api/v1/apps.json',
         type: 'get',
@@ -51,7 +51,7 @@ define(['const'], function($const) {
         data: {
           // 'sn': '8469e2920a239a83192eff5313abab82'
         },
-        // crossDomain: true,
+        crossDomain: true,
         headers: {
           'Authorization': 'Bearer 2da269b90d619cf96bc26570158f1aa72d9cfb395a82387ad714d73a7ab5668c'
         },
@@ -61,7 +61,7 @@ define(['const'], function($const) {
         error: function(XMLHttpRequest, textStatus) {
           console.log(textStatus);
         }
-      });
+      });*/
 
 
       return $.ajax({
@@ -88,7 +88,7 @@ define(['const'], function($const) {
      */
     getMyAppList: function() {
       return $.ajax({
-        url: server + '/api/v1/wares.json',
+        url: server + '/api/v1/mywares.json',
         type: 'get',
         dataType: 'json',
         data: {

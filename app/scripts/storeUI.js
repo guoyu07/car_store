@@ -1,5 +1,5 @@
 
-define(['const'], function($const) {
+define(['const', 'storeAction'], function($const, storeAction) {
 
   var server = $const.server;
 
@@ -17,17 +17,18 @@ define(['const'], function($const) {
           var operateText = app.status === 'true' ? '已安装' : '安装';
           var operateClass = app.status === 'true' ? 'installed' : 'install';
 
-          appListHTML += '<li data-id="' + app.id + '" data-package="' + app.packagename + '">' +
+          appListHTML += '<li class="app-meta" data-id="' + app.id + '" data-package="' + app.packagename + '" data-status="' + app.status + '">' +
             '<a href="app.html?id=' + app.id + '">' +
               '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
               '<div class="app-info">' +
                 '<div class="app-name">' + app.name + '</div>' +
                 '<div class="app-summary">' + app.resume + '</div>' +
               '</div></a>' +
-              '<div class="app-operate ' + operateClass + '"><a href="#">' + operateText + '</a></div>' +
+              '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
           '</li>';
         });
         appList.html(appListHTML);
+        appList.click(storeAction.installAction); // 采用委托机制
       }
     },
 
@@ -41,21 +42,22 @@ define(['const'], function($const) {
         var appListHTML = '';
 
         data.map(function(app) {
-          var operateText = app.status === 'true' ? '已安装' : '安装';
-          var operateClass = app.status === 'true' ? 'installed' : 'install';
+          var operateText = app.status === 'true' ? '卸载' : '安装';
+          var operateClass = app.status === 'true' ? 'uninstall' : 'install';
 
-          appListHTML += '<li data-id="' + app.id + '" data-package="' + app.packagename + '">' +
+          appListHTML += '<li class="app-meta" data-id="' + app.id + '" data-package="' + app.packagename + '" data-status="' + app.status + '">' +
             '<a href="app.html?id=' + app.id + '">' +
               '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
               '<div class="app-info">' +
                 '<div class="app-name">' + app.name + '</div>' +
-                '<div class="app-version">版本 1.0</div>' +
-                '<div class="app-size">12.9 M</div>' +
+                '<div class="app-version">版本 ' + app.version_name + '</div>' +
+                '<div class="app-size">' + app.softsize + ' M</div>' +
               '</div></a>' +
-              '<div class="app-operate ' + operateClass + '"><a href="#">' + operateText + '</a></div>' +
+              '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
           '</li>';
         });
         myAppList.html(appListHTML);
+        myAppList.click(storeAction.installAction);
       }
     },
 
@@ -77,15 +79,18 @@ define(['const'], function($const) {
         appInfoHTML = '<div class="app-logo"><img src="' + server + data.logo + '"></div>' +
           '<div class="app-info">' +
           '<div class="app-name">' + data.name + '</div>' +
-          '<div class="app-version">版本 1.0</div>' +
-          '<div class="app-size">12.9 M</div>' +
+          '<div class="app-version">版本 ' + data.version_name + '</div>' +
+          '<div class="app-size">' + data.softsize + ' M</div>' +
         '</div>' +
-        '<div class="app-operate ' + operateClass + '"><a href="#">' + operateText + '</a></div>';
-        appInfo.attr({
+        '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>';
+
+        appInfo.addClass('app-meta').attr({
           'data-id': data.id,
-          'data-package': data.packagename
+          'data-package': data.packagename,
+          'data-status': data.status
         });
         appInfo.html(appInfoHTML);
+        appInfo.click(storeAction.installAction);
 
         // 应用截图
         if(data.screenshots && data.screenshots.length > 0) {
@@ -98,8 +103,36 @@ define(['const'], function($const) {
         // 应用介绍
         appIntro.html(data.describe);
       }
+    },
 
-      console.log(data)
+    /*
+     * 安装应用提示消息 UI
+     */
+    renderSetupMsg: function(message) {
+      var msgHTML = '<div class="msg"><ul class="app2sinan">' +
+        '<li class="left" style="background-image:url(images/test/app1.png)"></li>' +
+          '<li class="middle"></li>' +
+          '<li class="right"></li>' +
+        '</ul>' +
+        '<div class="content">支付宝 将会很快就运到您的司南盒子上！</div>' +
+        '<div class="operate"><a href="#">好的</a></div>' +
+      '</div>';
+    },
+
+    /*
+     * 更新 安装与卸载按钮的状态
+     */
+    updateOperateState: function(button) {
+      if(button.hasClass('install')) {
+        button.text('已安装');
+        button.addClass('installed');
+        button.removeClass('install');
+      }
+      else if(button.hasClass('installed')) {
+        button.text('安装');
+        button.addClass('install');
+        button.removeClass('installed');
+      }
     }
   }
 });

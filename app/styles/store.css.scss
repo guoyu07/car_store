@@ -154,11 +154,11 @@ body.store-home {
         font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
         font-size: 14 / $default-vw2px * 1vw;
 
-        a.install {
+        &.install {
           color: #1affff;
         }
-        a.installed {
-          color: #3b3b3c;
+        &.installed {
+          color: #676768;
         }
         &:active {
           background-color: #3b3b3d;
@@ -252,6 +252,12 @@ $app-info-padding: 48 / 1080 * 100%;
       font-size: px2em(14px, $default-font-size); /* COMPATIBLE CODE */
       font-size: 14 / $default-vw2px * 1vw;
 
+      &.install {
+        color: #1affff;
+      }
+      &.installed {
+        color: #676768;
+      }
       &:active {
         color: #fff;
       }

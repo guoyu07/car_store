@@ -1,6 +1,6 @@
 
 /*
- * 一些工具类
+ * 一些工具方法
  */
 define({
   getURLParam: function(name) {
