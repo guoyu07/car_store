@@ -11,13 +11,12 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var appList = $('#appList');
 
       if(data && data.length) {
-        var appListHTML = '';
 
         data.map(function(app) {
           var operateText = app.status === 'true' ? '已安装' : '安装';
           var operateClass = app.status === 'true' ? 'installed' : 'install';
 
-          appListHTML += '<li class="app-meta" data-id="' + app.id + '" data-package="' + app.packagename + '" data-status="' + app.status + '">' +
+          var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
               '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
               '<div class="app-info">' +
@@ -26,8 +25,19 @@ define(['const', 'storeAction'], function($const, storeAction) {
               '</div></a>' +
               '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
           '</li>';
+          var appELEM = $(appHTML);
+
+          // 缓存数据
+          appELEM.data({
+            'id': app.id,
+            'name': app.name,
+            'logo': server + app.logo,
+            'package': app.packagename,
+            'status': app.status
+          });
+          appList.append(appELEM);
         });
-        appList.html(appListHTML);
+
         appList.click(storeAction.installAction); // 采用委托机制
       }
     },
@@ -39,13 +49,12 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var myAppList = $('#myAppList');
 
       if(data && data.length) {
-        var appListHTML = '';
 
         data.map(function(app) {
           var operateText = app.status === 'true' ? '卸载' : '安装';
           var operateClass = app.status === 'true' ? 'uninstall' : 'install';
 
-          appListHTML += '<li class="app-meta" data-id="' + app.id + '" data-package="' + app.packagename + '" data-status="' + app.status + '">' +
+          var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
               '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
               '<div class="app-info">' +
@@ -55,8 +64,19 @@ define(['const', 'storeAction'], function($const, storeAction) {
               '</div></a>' +
               '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
           '</li>';
+          var appELEM = $(appHTML);
+
+          // 缓存数据
+          appELEM.data({
+            'id': app.id,
+            'name': app.name,
+            'logo': server + app.logo,
+            'package': app.packagename,
+            'status': app.status
+          });
+          myAppList.append(appELEM);
         });
-        myAppList.html(appListHTML);
+
         myAppList.click(storeAction.installAction);
       }
     },
@@ -84,10 +104,13 @@ define(['const', 'storeAction'], function($const, storeAction) {
         '</div>' +
         '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>';
 
-        appInfo.addClass('app-meta').attr({
-          'data-id': data.id,
-          'data-package': data.packagename,
-          'data-status': data.status
+        // 缓存数据
+        appInfo.addClass('app-meta').data({
+          'id': data.id,
+          'name': data.name,
+          'logo': server + data.logo,
+          'package': data.packagename,
+          'status': data.status
         });
         appInfo.html(appInfoHTML);
         appInfo.click(storeAction.installAction);
@@ -109,6 +132,8 @@ define(['const', 'storeAction'], function($const, storeAction) {
      * 安装应用提示消息 UI
      */
     renderSetupMsg: function(message) {
+      var mask = $('#mask');
+
       var msgHTML = '<div class="msg"><ul class="app2sinan">' +
         '<li class="left" style="background-image:url(images/test/app1.png)"></li>' +
           '<li class="middle"></li>' +
