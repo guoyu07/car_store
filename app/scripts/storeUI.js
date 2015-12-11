@@ -11,10 +11,11 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var appList = $('#appList');
 
       if(data && data.length) {
-
         data.map(function(app) {
-          var operateText = app.status === 'true' ? '已安装' : '安装';
-          var operateClass = app.status === 'true' ? 'installed' : 'install';
+          var operate = {
+            'true': ['installed', '已安装'],
+            'false': ['install', '安装']
+          };
 
           var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
@@ -23,8 +24,9 @@ define(['const', 'storeAction'], function($const, storeAction) {
                 '<div class="app-name">' + app.name + '</div>' +
                 '<div class="app-summary">' + app.resume + '</div>' +
               '</div></a>' +
-              '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
-          '</li>';
+              '<div class="app-operate">' +
+                '<a href="javascript:void(0);" class="' + operate[app.status][0] + '">' + operate[app.status][1] + '</a>' +
+            '</div></li>';
           var appELEM = $(appHTML);
 
           // 缓存数据
@@ -33,26 +35,29 @@ define(['const', 'storeAction'], function($const, storeAction) {
             'name': app.name,
             'logo': server + app.logo,
             'package': app.packagename,
-            'status': app.status
+            'status': app.status,
+            'operate': operate
           });
           appList.append(appELEM);
         });
 
-        appList.click(storeAction.installAction); // 采用委托机制
+        appList.click(storeAction.operateAction); // 采用委托机制
       }
     },
 
     /*
      * 我的应用列表 UI
      */
-    renderMyAppList: function(data) {console.log(data)
+    renderMyAppList: function(data) {
       var myAppList = $('#myAppList');
 
       if(data && data.length) {
 
         data.map(function(app) {
-          var operateText = app.status === 'true' ? '卸载' : '安装';
-          var operateClass = app.status === 'true' ? 'uninstall' : 'install';
+          var operate = {
+            'true': ['uninstall', '卸载'],
+            'false': ['install', '安装']
+          };
 
           var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
@@ -62,8 +67,9 @@ define(['const', 'storeAction'], function($const, storeAction) {
                 '<div class="app-version">版本 ' + app.version_name + '</div>' +
                 '<div class="app-size">' + app.softsize + ' M</div>' +
               '</div></a>' +
-              '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>' +
-          '</li>';
+              '<div class="app-operate">' +
+                '<a href="javascript:void(0);" class="' + operate[app.status][0] + '">' + operate[app.status][1] + '</a>' +
+            '</div></li>';
           var appELEM = $(appHTML);
 
           // 缓存数据
@@ -72,12 +78,13 @@ define(['const', 'storeAction'], function($const, storeAction) {
             'name': app.name,
             'logo': server + app.logo,
             'package': app.packagename,
-            'status': app.status
+            'status': app.status,
+            'operate': operate
           });
           myAppList.append(appELEM);
         });
 
-        myAppList.click(storeAction.installAction);
+        myAppList.click(storeAction.operateAction);
       }
     },
 
@@ -92,8 +99,10 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var appInfoHTML = appScreenshotsHTML = '';
 
       if(data) {
-        var operateText = data.status === 'true' ? '已安装' : '安装';
-        var operateClass = data.status === 'true' ? 'installed' : 'install';
+        var operate = {
+          'true': ['installed', '已安装'],
+          'false': ['install', '安装']
+        };
 
         // 应用信息
         appInfoHTML = '<div class="app-logo"><img src="' + server + data.logo + '"></div>' +
@@ -102,7 +111,9 @@ define(['const', 'storeAction'], function($const, storeAction) {
           '<div class="app-version">版本 ' + data.version_name + '</div>' +
           '<div class="app-size">' + data.softsize + ' M</div>' +
         '</div>' +
-        '<div class="app-operate"><a href="javascript:void(0);" class="' + operateClass + '">' + operateText + '</a></div>';
+        '<div class="app-operate">' +
+          '<a href="javascript:void(0);" class="' + operate[data.status][0] + '">' + operate[data.status][1] + '</a>' +
+        '</div>';
 
         // 缓存数据
         appInfo.addClass('app-meta').data({
@@ -110,10 +121,11 @@ define(['const', 'storeAction'], function($const, storeAction) {
           'name': data.name,
           'logo': server + data.logo,
           'package': data.packagename,
-          'status': data.status
+          'status': data.status,
+          'operate': operate
         });
         appInfo.html(appInfoHTML);
-        appInfo.click(storeAction.installAction);
+        appInfo.click(storeAction.operateAction);
 
         // 应用截图
         if(data.screenshots && data.screenshots.length > 0) {
@@ -143,32 +155,29 @@ define(['const', 'storeAction'], function($const, storeAction) {
         '<div class="operate"><a href="javascript:void(0);" class="close">好的</a></div>' +
       '</div>';
 
-      mask.html(msgHTML).show();
+      mask.html(msgHTML).addClass('visible');
 
       // 关闭弹框
       mask.find('.close').click(function() {
-        mask.hide();
+        mask.removeClass('visible');
       });
     },
 
     /*
      * 更新 安装与卸载按钮的状态
      */
-    updateOperateState: function(button) {
+    updateOperateState: function(button, metadata) {
       // 时间限制在 300 ~ 1300
       var millisec = Math.round(Math.random() * 1000 + 300);
 
+      var operate = metadata.operate;
+      var new_status = metadata.status;
+      var old_status = new_status == 'true' ? 'false' : 'true';
+
       setTimeout(function() {
-        if(button.hasClass('install')) {
-          button.text('已安装')
-            .addClass('installed')
-            .removeClass('install');
-        }
-        else if(button.hasClass('installed')) {
-          button.text('安装')
-            .addClass('install')
-            .removeClass('installed');
-        }
+        button.text(operate[new_status][1])
+          .addClass(operate[new_status][0])
+          .removeClass(operate[old_status][0]);
       }, millisec);
     }
   }

@@ -35,12 +35,38 @@ button {
 
 // 遮罩
 .mask {
-  display: none;
   top: 0;
   bottom: 0;
   width: 100%;
   position: fixed;
   background-color: rgba(0,0,0,.8);
+
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+  -webkit-transition:
+    opacity .25s cubic-bezier(.465, .183, .153, .946),
+    -webkit-transform 0.1s cubic-bezier(.465, .183, .153, .946);
+  transition:
+    opacity .25s cubic-bezier(.465, .183, .153, .946),
+    transform .25s cubic-bezier(.465, .183, .153, .946);
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transition:
+      opacity .3s .3s cubic-bezier(.465, .183, .153, .946),
+      -webkit-transform .3s .3s cubic-bezier(.465, .183, .153, .946);
+    transition:
+      opacity .3s .3s cubic-bezier(.465, .183, .153, .946),
+      transform .3s .3s cubic-bezier(.465, .183, .153, .946);
+  }
 }
 
 /* # 提示 */

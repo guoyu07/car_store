@@ -5,7 +5,7 @@ define(['const'], function($const) {
   var server1 = 'http://172.16.10.91:8080';
 
   var sn = '8469e2920a239a83192eff5313abab82';
-  var access_token = '687b4ec90fd08fcb35cd2dfbe04d8eb80e2e9dd089589f4f64c099f661bd1033';
+  var access_token = '2bfd8686ba35e193c2d47611280393894559559bb38d5f886656a2ff7376a716';
 
   return {
     /*

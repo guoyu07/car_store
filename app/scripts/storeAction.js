@@ -2,44 +2,55 @@
 define(function(require, exports, module) {
   var storeApi = require('storeApi');
 
+  /*
+   * 处理安装动作
+   */
+  var installAction = function(metadata) {
+    var id = metadata.id;
+    var status = metadata.status;
+
+    // storeApi.setup(id).then(function(data) {
+    //   console.log(111111111)
+    //   console.log(data)
+    // });
+
+    // require 解决循环依赖问题
+    require('storeUI').renderSetupMsg({
+      'logo': metadata.logo,
+      'content': metadata.name + ' 将会很快就运到您的司南盒子上！'
+    });
+  };
+  /*
+   * 处理卸载动作
+   */
+  var uninstallAction = function(metadata) {
+
+  };
+
   return {
-    /*
-     * 处理安装动作
-     */
-    installAction: function() {
+    operateAction: function() {
       var target = $(event.target);
-      var meta = target.parents('.app-meta');
+      var metadata = target.parents('.app-meta').data();
 
-      if(meta.length > 0 && target.hasClass('install')) {
-        var id = meta.data('id');
-        var status = meta.data('status');
+      if(metadata) {
+        var status = metadata.status;
+        var operate = metadata.operate;
 
-        if(status === 'false') { // 表示未安装应用
-          storeApi.setup(id).then(function(data) {
-            console.log(111111111)
-            console.log(data)
-          });
+        if(operate[status][0] == 'install') {
+          installAction(metadata);
 
-          meta.data('status', 'true');
+          metadata.status = 'true';
 
-          var storeUI = require('storeUI');
+          // 改变按钮状态
+          require('storeUI').updateOperateState(target, metadata);
+        }
+        else if(operate[status][0] == 'uninstall') {
+          uninstallAction(metadata);
 
-          storeUI.renderSetupMsg({
-            'logo': meta.data('logo'),
-            'content': meta.data('name') + ' 将会很快就运到您的司南盒子上！'
-          });
-          // 改变按钮状态 循环依赖解决方案
-          storeUI.updateOperateState(target);
+          // 改变按钮状态
+          require('storeUI').updateOperateState(target, metadata);
         }
       }
-    },
-
-    /*
-     * 处理卸载动作
-     */
-    uninstallAction: function() {
-
-      return false;
     }
   };
 });
