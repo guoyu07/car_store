@@ -5,7 +5,7 @@ define(['const'], function($const) {
   var server1 = 'http://172.16.10.91:8080';
 
   var sn = '8469e2920a239a83192eff5313abab82';
-  var access_token = '2bfd8686ba35e193c2d47611280393894559559bb38d5f886656a2ff7376a716';
+  var access_token = '91b28cb1f8031b27250ba77777e898152359b5e2f365d91beb190b0c0a058f62';
 
   return {
     /*
@@ -120,7 +120,7 @@ define(['const'], function($const) {
     /*
      * 安装应用
      */
-    setup: function(appId) {
+    install: function(appId) {
       return $.ajax({
         url: server + '/api/v1/wares.json',
         type: 'post',
@@ -128,6 +128,23 @@ define(['const'], function($const) {
         data: {
           'sn': sn,
           'id': appId,
+        },
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        }
+      });
+    },
+
+    /*
+     * 卸载应用
+     */
+    uninstall: function(appId) {
+      return $.ajax({
+        url: server + '/api/v1/wares/' + appId + '.json',
+        type: 'delete',
+        dataType: 'json',
+        data: {
+          'sn': sn
         },
         headers: {
           'Authorization': 'Bearer ' + access_token

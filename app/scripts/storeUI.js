@@ -54,9 +54,10 @@ define(['const', 'storeAction'], function($const, storeAction) {
       if(data && data.length) {
 
         data.map(function(app) {
+          app.status = 'true'; // 只有唯一状态
+
           var operate = {
             'true': ['uninstall', '卸载'],
-            'false': ['install', '安装']
           };
 
           var appHTML = '<li class="app-meta">' +
@@ -82,6 +83,8 @@ define(['const', 'storeAction'], function($const, storeAction) {
             'operate': operate
           });
           myAppList.append(appELEM);
+
+          appELEM.height(appELEM.height());
         });
 
         myAppList.click(storeAction.operateAction);

@@ -5,26 +5,44 @@ define(function(require, exports, module) {
   /*
    * 处理安装动作
    */
-  var installAction = function(metadata) {
+  var installAction = function(target, metadata) {
     var id = metadata.id;
     var status = metadata.status;
 
-    // storeApi.setup(id).then(function(data) {
-    //   console.log(111111111)
-    //   console.log(data)
-    // });
+    metadata.status = 'true';
 
-    // require 解决循环依赖问题
-    require('storeUI').renderSetupMsg({
-      'logo': metadata.logo,
-      'content': metadata.name + ' 将会很快就运到您的司南盒子上！'
+    storeApi.install(id).then(function(data) { // 安装成功
+      var storeUI = require('storeUI');
+
+      // require 解决循环依赖问题
+      storeUI.renderSetupMsg({
+        'logo': metadata.logo,
+        'content': metadata.name + ' 将会很快就运到您的司南盒子上！'
+      });
+      // 改变按钮状态
+      storeUI.updateOperateState(target, metadata);
+
+    }, function() { // 安装失败
+      metadata.status = 'false';
     });
   };
   /*
    * 处理卸载动作
    */
-  var uninstallAction = function(metadata) {
+  var uninstallAction = function(target, metadata) {
+    var id = metadata.id;
 
+    // storeApi.uninstall(id).then(function(data) {
+      // debugger
+      // console.log(target.closest('li').outerHeight())
+      // target.closest('li').slideUp(500);
+
+      var element = target.closest('li');
+
+      element.addClass('fadeOutLeft slideUp');
+
+        // height().addClass('slideUp');
+    // });
   };
 
   return {
@@ -37,18 +55,10 @@ define(function(require, exports, module) {
         var operate = metadata.operate;
 
         if(operate[status][0] == 'install') {
-          installAction(metadata);
-
-          metadata.status = 'true';
-
-          // 改变按钮状态
-          require('storeUI').updateOperateState(target, metadata);
+          installAction(target, metadata);
         }
         else if(operate[status][0] == 'uninstall') {
-          uninstallAction(metadata);
-
-          // 改变按钮状态
-          require('storeUI').updateOperateState(target, metadata);
+          uninstallAction(target, metadata);
         }
       }
     }

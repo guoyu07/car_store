@@ -18,9 +18,12 @@ section.myapps {
     li {
       position: relative;
       line-height: 1;
-      border-bottom: 1px solid #313a3a;
+      border: 1px solid #313a3a;
       display: block;
       padding: $app-list-padding;
+      overflow: hidden;
+
+      margin-top: -1px;
     }
     .app-logo {
       $app-logo-size: (174 / 3) / $default-vw2px * 1vw;
@@ -44,8 +47,8 @@ section.myapps {
       // overflow: hidden;
 
       height: 53 / $default-vw2px * 1vw; // 这里高度不能百分比布局, 只能相对视窗大小
-      padding-top: px2em(2px, $default-font-size); /* COMPATIBLE CODE */
-      padding-top: 2 / $default-vw2px * 1vw;
+      padding: px2em(2px, $default-font-size) 0; /* COMPATIBLE CODE */
+      padding: 2 / $default-vw2px * 1vw 0;
       margin-left: (174 + 40) / 984 * 100%;
       margin-right: 150 / 984 * 100%;
     }
@@ -104,16 +107,117 @@ section.myapps {
              -o-transition: background-color .25s;
                 transition: background-color .25s;
 
-        &.install {
+        &.uninstall {
           color: #1affff;
         }
         &:active {
           background-color: #3b3b3d;
         }
-        &.uninstall {
-          color: #676768;
-        }
       }
     }
+  }
+}
+
+
+/* # 动画 */
+.slideUp {
+  $delay: .6s;
+  $duration: .4s;
+
+  border-width: 0 !important;
+  height: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
+  -webkit-transition:
+    border-width $duration $delay,
+    height $duration $delay,
+    margin-top $duration $delay,
+    padding-top $duration $delay,
+    padding-bottom $duration $delay;
+  -moz-transition:
+    border-width $duration $delay,
+    height $duration $delay,
+    margin-top $duration $delay,
+    padding-top $duration $delay,
+    padding-bottom $duration $delay;
+  -ms-transition:
+    border-width $duration $delay,
+    height $duration $delay,
+    margin-top $duration $delay,
+    padding-top $duration $delay,
+    padding-bottom $duration $delay;
+  -o-transition:
+    border-width $duration $delay,
+    height $duration $delay,
+    margin-top $duration $delay,
+    padding-top $duration $delay,
+    padding-bottom $duration $delay;
+  transition:
+    border-width $duration $delay,
+    height $duration $delay,
+    margin-top $duration $delay,
+    padding-top $duration $delay,
+    padding-bottom $duration $delay;
+}
+.fadeOutLeft {
+  -webkit-animation-name: fadeOutLeft;
+          animation-name: fadeOutLeft;
+
+  -webkit-animation-duration: .7s;
+          animation-duration: .7s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@-moz-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@-ms-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@-o-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 }
