@@ -32,17 +32,9 @@ define(function(require, exports, module) {
   var uninstallAction = function(target, metadata) {
     var id = metadata.id;
 
-    // storeApi.uninstall(id).then(function(data) {
-      // debugger
-      // console.log(target.closest('li').outerHeight())
-      // target.closest('li').slideUp(500);
-
-      var element = target.closest('li');
-
-      element.addClass('fadeOutLeft slideUp');
-
-        // height().addClass('slideUp');
-    // });
+    storeApi.uninstall(id).then(function(data) {
+      target.closest('li').addClass('fadeOutLeft slideUp');
+    });
   };
 
   return {
