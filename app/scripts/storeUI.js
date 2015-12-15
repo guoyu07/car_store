@@ -3,6 +3,23 @@ define(['const', 'storeAction'], function($const, storeAction) {
 
   var server = $const.server;
 
+  /*
+   * 清除应用列表 UI
+   */
+  var clearAppList = function(appList) {
+    if(appList.is(':empty') == false) {
+      appList.empty().unbind();
+    }
+  };
+  /*
+   * 清除我的应用列表 UI
+   */
+  var clearMyAppList = function(myAppList) {
+    if(myAppList.is(':empty') == false) {
+      myAppList.empty().unbind();
+    }
+  };
+
   return {
     /*
      * 设置应用列表的界面
@@ -11,6 +28,8 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var appList = $('#appList');
 
       if(data && data.length) {
+        clearAppList(appList);
+
         data.map(function(app) {
           var operate = {
             'true': ['installed', '已安装'],
@@ -52,6 +71,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
       var myAppList = $('#myAppList');
 
       if(data && data.length) {
+        clearMyAppList(myAppList);
 
         data.map(function(app) {
           app.status = 'true'; // 只有唯一状态

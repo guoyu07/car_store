@@ -37,6 +37,27 @@ define(function(require, exports, module) {
     });
   };
 
+
+  /* 暴露给移动端调用的接口 */
+
+  /*
+   * 主动刷新应用列表
+   */
+  window.refreshAppList = function() {
+    storeApi.getAppList().then(function(data) {
+      require('storeUI').renderAppList(data);
+    })
+  };
+  /*
+   * 主动刷新我的应用列表
+   */
+  window.refreshMyAppList = function() {
+    storeApi.getMyAppList().then(function(data) {
+      require('storeUI').renderMyAppList(data);
+    });
+  };
+
+
   return {
     operateAction: function() {
       var target = $(event.target);
