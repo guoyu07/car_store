@@ -1,11 +1,14 @@
 
-define(['const'], function($const) {
+define(['const', 'utils'], function($const, utils) {
 
   var server = $const.server;
   var server1 = 'http://172.16.10.91:8080';
 
-  var sn = '8469e2920a239a83192eff5313abab82';
-  var access_token = 'a5e30f0fe6cb24496b745b76d3c8c4000cf6853a5ff5d3408be74dd2d4560e85';
+  // var sn = '8469e2920a239a83192eff5313abab82';
+  // var access_token = 'a5e30f0fe6cb24496b745b76d3c8c4000cf6853a5ff5d3408be74dd2d4560e85';
+
+  var sn = utils.getCookieByKey('sn');
+  var access_token = utils.getCookieByKey('access_token');
 
   return {
     /*
