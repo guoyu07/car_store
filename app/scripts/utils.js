@@ -22,5 +22,16 @@ define({
       return result[2];
     }
     return null;
+  },
+  /*
+   * 设置 cookie
+   */
+  setCookie: function(key, value) {
+    var day = 30;
+    var date = new Date;
+
+    date.setTime(date.getTime() + day * 24 * 60 * 60);
+
+    document.cookie = key + '=' + value + ';expires=' + date.toGMTString();
   }
 });

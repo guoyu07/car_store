@@ -4,8 +4,15 @@ define(['const', 'utils'], function($const, utils) {
   var server = $const.server;
   var server1 = 'http://172.16.10.91:8080';
 
+  var hostname = window.location.hostname;
+
+  if(hostname == '0.0.0.0' || hostname == 'localhost') {
+    utils.setCookie('sn', '8469e2920a239a83192eff5313abab82');
+    utils.setCookie('access_token', '91cb5f82d611d528be0ada89d50ff45fcbe6e853b75f965563da68755c5d9dc4');
+  }
+
   // var sn = '8469e2920a239a83192eff5313abab82';
-  // var access_token = 'a5e30f0fe6cb24496b745b76d3c8c4000cf6853a5ff5d3408be74dd2d4560e85';
+  // var access_token = '91cb5f82d611d528be0ada89d50ff45fcbe6e853b75f965563da68755c5d9dc4';
 
   var sn = utils.getCookieByKey('sn');
   var access_token = utils.getCookieByKey('access_token');
