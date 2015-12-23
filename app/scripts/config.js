@@ -3,6 +3,7 @@ require.config({
   baseUrl: 'scripts',
   paths: {
     'flexslider': './plugins/jquery.flexslider',
+    'scrollstop': './plugins/jquery.scrollstop',
     'jquery': '../../bower_components/jquery/dist/jquery',
   },
   shim: {

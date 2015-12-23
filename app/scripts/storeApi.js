@@ -7,8 +7,8 @@ define(['const', 'utils'], function($const, utils) {
   var hostname = window.location.hostname;
 
   if(hostname == '0.0.0.0' || hostname == 'localhost') {
-    utils.setCookie('sn', '8469e2920a239a83192eff5313abab82');
-    utils.setCookie('access_token', '91cb5f82d611d528be0ada89d50ff45fcbe6e853b75f965563da68755c5d9dc4');
+    utils.setCookie('sn', '8469e2920a239a83192eff5313aba');
+    utils.setCookie('access_token', '2948bbd535afae81427023c9960290906dfe2786e38a22e4125129ee2d06f568');
   }
 
   // var sn = '8469e2920a239a83192eff5313abab82';

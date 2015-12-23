@@ -19,6 +19,46 @@ define(['const', 'storeAction'], function($const, storeAction) {
       myAppList.empty().unbind();
     }
   };
+  /*
+   * 应用详情页的截图位置 优化
+   */
+  var screenshotsOptimize = function(screenshots, complete) {
+    var prev, next;
+
+    screenshots.find('li').each(function() {
+      var posLeft = $(this).position().left;
+
+      if (posLeft < 0) {
+        prev = $(this); // prev 为刚好超越左边界的截图
+      } else if (posLeft >= 0) {
+        next = $(this); // next 为第一个未超越左边界的截图
+
+        return false;
+      }
+    });
+
+    if(prev) {
+      var delta = 0;
+      var scrollLeft = screenshots.scrollLeft();
+      var screenshotWidth = prev.outerWidth(true);
+      var prevPosLeft = Math.abs(prev.position().left);
+
+      // 未越过截图宽度的一半
+      if(prevPosLeft < screenshotWidth / 2) {
+        delta = - prevPosLeft; // 右移
+      } else {
+        delta = screenshotWidth - prevPosLeft; // 左移
+      }
+
+      screenshots.animate({
+        'scrollLeft': scrollLeft + delta
+      }, 300, function() {
+        complete && complete.call();
+      });
+    } else {
+      complete && complete.call();
+    }
+  };
 
   return {
     /*
@@ -155,7 +195,18 @@ define(['const', 'storeAction'], function($const, storeAction) {
           data.screenshots.map(function(imageUrl) {
             appScreenshotsHTML += '<li><img src="' + server + imageUrl + '"></li>';
           });
-          appScreenshots.html(appScreenshotsHTML);
+          appScreenshots.html('<ul>' + appScreenshotsHTML + '</ul>');
+
+          appScreenshots.bind('scrollstop', function handler() {
+            var self = $(this);
+
+            self.unbind('scrollstop');
+            // 优化应用截图
+            screenshotsOptimize(self, function() {
+              // 动画回调: 恢复注册事件
+              self.bind('scrollstop', handler);
+            });
+          });
         }
 
         // 应用介绍

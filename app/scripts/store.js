@@ -1,5 +1,5 @@
 
-define(['storeApi', 'storeUI', 'flexslider'], function(storeApi, storeUI){
+define(['storeApi', 'storeUI', 'flexslider', 'scrollstop'], function(storeApi, storeUI){
 
   return {
     /*
@@ -8,6 +8,7 @@ define(['storeApi', 'storeUI', 'flexslider'], function(storeApi, storeUI){
     store_home_page: function() {
       // 应用市场主页焦点图
       $('#banner').flexslider({
+        // touch: false,
         animation: 'slide',
         easing: 'ease',
         controlNav: false,
