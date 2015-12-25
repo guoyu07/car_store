@@ -8,7 +8,7 @@ define(['const', 'utils'], function($const, utils) {
 
   if(hostname == '0.0.0.0' || hostname == 'localhost') {
     utils.setCookie('sn', '8469e2920a239a83192eff5313aba');
-    utils.setCookie('access_token', '2948bbd535afae81427023c9960290906dfe2786e38a22e4125129ee2d06f568');
+    utils.setCookie('access_token', 'ba84746056ff81ca8a3053c9954bb076d5c09975662dba661e0ce94e87bc725e');
   }
 
   // var sn = '8469e2920a239a83192eff5313abab82';
@@ -16,6 +16,8 @@ define(['const', 'utils'], function($const, utils) {
 
   var sn = utils.getCookieByKey('sn');
   var access_token = utils.getCookieByKey('access_token');
+
+  alert(document.cookie);
 
   return {
     /*
