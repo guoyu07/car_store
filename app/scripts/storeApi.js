@@ -7,8 +7,8 @@ define(['const', 'utils'], function($const, utils) {
   var hostname = window.location.hostname;
 
   if(hostname == '0.0.0.0' || hostname == 'localhost') {
-    utils.setCookie('sn', '8469e2920a239a83192eff5313aba');
-    utils.setCookie('access_token', 'ba84746056ff81ca8a3053c9954bb076d5c09975662dba661e0ce94e87bc725e');
+    utils.setCookie('sn', 'ef876090f7b0ec963da35687c28b7fc9');
+    utils.setCookie('access_token', '404a0c498a249afbaae7f5b37dbb9861');
   }
 
   // var sn = '8469e2920a239a83192eff5313abab82';
@@ -17,7 +17,7 @@ define(['const', 'utils'], function($const, utils) {
   var sn = utils.getCookieByKey('sn');
   var access_token = utils.getCookieByKey('access_token');
 
-  alert(document.cookie);
+  // alert(document.cookie);
 
   return {
     /*
@@ -77,7 +77,7 @@ define(['const', 'utils'], function($const, utils) {
 
 
       return $.ajax({
-        url: server + '/api/v1/wares.json',
+        url: server + '/api/v1/wares',
         type: 'get',
         dataType: 'json',
         data: {
@@ -100,7 +100,7 @@ define(['const', 'utils'], function($const, utils) {
      */
     getMyAppList: function() {
       return $.ajax({
-        url: server + '/api/v1/mywares.json',
+        url: server + '/api/v1/mywares',
         type: 'get',
         dataType: 'json',
         data: {
@@ -117,11 +117,12 @@ define(['const', 'utils'], function($const, utils) {
      */
     getApp: function(appId) {
       return $.ajax({
-        url: server + '/api/v1/wares/' + appId + '.json',
+        url: server + '/api/v1/ware',
         type: 'get',
         dataType: 'json',
         data: {
-          'sn': sn
+          'sn': sn,
+          'id': appId
         },
         headers: {
           'Authorization': 'Bearer ' + access_token
@@ -134,7 +135,7 @@ define(['const', 'utils'], function($const, utils) {
      */
     install: function(appId) {
       return $.ajax({
-        url: server + '/api/v1/wares.json',
+        url: server + '/api/v1/ware',
         type: 'post',
         dataType: 'json',
         data: {
@@ -152,11 +153,12 @@ define(['const', 'utils'], function($const, utils) {
      */
     uninstall: function(appId) {
       return $.ajax({
-        url: server + '/api/v1/wares/' + appId + '.json',
+        url: server + '/api/v1/ware?id=' + appId + '&sn=' + sn,
         type: 'delete',
         dataType: 'json',
         data: {
-          'sn': sn
+          'sn': sn,
+          'id': appId
         },
         headers: {
           'Authorization': 'Bearer ' + access_token

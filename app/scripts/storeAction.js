@@ -17,7 +17,7 @@ define(function(require, exports, module) {
       // require 解决循环依赖问题
       storeUI.renderSetupMsg({
         'logo': metadata.logo,
-        'content': metadata.name + ' 将会很快就运到您的司南盒子上！'
+        'content': metadata.name + ' 将会很快就安装到您的司南盒子上！'
       });
       // 改变按钮状态
       storeUI.updateOperateState(target, metadata);
@@ -63,15 +63,17 @@ define(function(require, exports, module) {
       var target = $(event.target);
       var metadata = target.parents('.app-meta').data();
 
-      if(metadata) {
-        var status = metadata.status;
-        var operate = metadata.operate;
+      if(target.parent().hasClass('app-operate')) {
+        if(metadata) {
+          var status = metadata.status;
+          var operate = metadata.operate;
 
-        if(operate[status][0] == 'install') {
-          installAction(target, metadata);
-        }
-        else if(operate[status][0] == 'uninstall') {
-          uninstallAction(target, metadata);
+          if(operate[status][0] == 'install') {
+            installAction(target, metadata);
+          }
+          else if(operate[status][0] == 'uninstall') {
+            uninstallAction(target, metadata);
+          }
         }
       }
     }

@@ -1,5 +1,6 @@
 {
   "name": "car-store",
+  "bitbucket": "http://bitbucket.xgene.io/projects/AV/repos/html5-app-store/browse",
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "grunt": "^0.4.5",

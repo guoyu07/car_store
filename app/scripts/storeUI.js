@@ -78,7 +78,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
 
           var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
-              '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
+              '<div class="app-logo"><img src="' + app.logo + '"></div>' +
               '<div class="app-info">' +
                 '<div class="app-name">' + app.name + '</div>' +
                 '<div class="app-summary">' + app.resume + '</div>' +
@@ -92,7 +92,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
           appELEM.data({
             'id': app.id,
             'name': app.name,
-            'logo': server + app.logo,
+            'logo': app.logo,
             'package': app.packagename,
             'status': app.status,
             'operate': operate
@@ -122,7 +122,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
 
           var appHTML = '<li class="app-meta">' +
             '<a href="app.html?id=' + app.id + '">' +
-              '<div class="app-logo"><img src="' + server + app.logo + '"></div>' +
+              '<div class="app-logo"><img src="' + app.logo + '"></div>' +
               '<div class="app-info">' +
                 '<div class="app-name">' + app.name + '</div>' +
                 '<div class="app-version">版本 ' + app.version_name + '</div>' +
@@ -137,7 +137,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
           appELEM.data({
             'id': app.id,
             'name': app.name,
-            'logo': server + app.logo,
+            'logo': app.logo,
             'package': app.packagename,
             'status': app.status,
             'operate': operate
@@ -168,7 +168,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
         };
 
         // 应用信息
-        appInfoHTML = '<div class="app-logo"><img src="' + server + data.logo + '"></div>' +
+        appInfoHTML = '<div class="app-logo"><img src="' + data.logo + '"></div>' +
           '<div class="app-info">' +
           '<div class="app-name">' + data.name + '</div>' +
           '<div class="app-version">版本 ' + data.version_name + '</div>' +
@@ -182,7 +182,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
         appInfo.addClass('app-meta').data({
           'id': data.id,
           'name': data.name,
-          'logo': server + data.logo,
+          'logo': data.logo,
           'package': data.packagename,
           'status': data.status,
           'operate': operate
