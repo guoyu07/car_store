@@ -67,6 +67,9 @@ button {
       opacity .3s .3s cubic-bezier(.465, .183, .153, .946),
       transform .3s .3s cubic-bezier(.465, .183, .153, .946);
   }
+  &.mask-dark {
+    background-color: rgba(0,0,0,.9);
+  }
 }
 
 /* # 提示 */
@@ -91,6 +94,18 @@ button {
 
 /* ## 安装应用的提示 */
 .msg {
+
+  &.msg-custom {
+    width: 870 / 1080 * 100%;
+    padding: 0;
+
+    background-color: initial;
+
+    .operate {
+      text-align: center;
+    }
+  }
+
   ul.app2sinan {
     font-size: 0px;
     white-space: nowrap;
@@ -121,9 +136,9 @@ button {
   }
   .content {
     line-height: 1.5em;
-    margin-top: px2em(21px, 16px); /* COMPATIBLE CODE */
+    // margin-top: px2em(21px, 16px); /* COMPATIBLE CODE */
     margin-bottom: px2em(5px, 16px); /* COMPATIBLE CODE */
-    margin-top: 21 / $default-vw2px * 1vw;
+    // margin-top: 21 / $default-vw2px * 1vw;
     margin-bottom: 5 / $default-vw2px * 1vw;
     font-size: px2em(16px, $default-font-size); /* COMPATIBLE CODE */
     font-size: 16 / $default-vw2px * 1vw;

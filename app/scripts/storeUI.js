@@ -193,7 +193,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
         // 应用截图
         if(data.screenshots && data.screenshots.length > 0) {
           data.screenshots.map(function(imageUrl) {
-            appScreenshotsHTML += '<li><img src="' + server + imageUrl + '"></li>';
+            appScreenshotsHTML += '<li><img src="' + imageUrl + '"></li>';
           });
           appScreenshots.html('<ul>' + appScreenshotsHTML + '</ul>');
 
@@ -215,16 +215,82 @@ define(['const', 'storeAction'], function($const, storeAction) {
     },
 
     /*
+     * 提示消息
+     */
+    renderMsg: function(options) {
+      var opts = $.extend({
+        message: '<div class="msg"></div>',
+        mask: null,      // {String}   遮罩层自定义样式类
+        onClose: null    // {Function} 关闭弹框, 默认会匹配 class 为 close 的按钮
+      }, options);
+
+      var mask = $('#mask');
+
+      mask.html(opts.message);
+      mask.addClass(opts.mask).addClass('visible');
+
+      // 关闭弹框
+      mask.find('.close').click(function() {
+        mask.removeClass(opts.mask).removeClass('visible');
+
+        opts.onClose && opts.onClose();
+      });
+    },
+    /*
+     * 未联网提示消息
+     */
+    renderOutLineMsg: function(message) {
+      message = message ? message : '当前网络不可用，请检查你的网络设置。';
+
+      this.renderMsg({
+        message: '<div class="msg msg-custom">' +
+                   '<div class="content">' + message + '</div>' +
+                   '<div class="operate"><a href="javascript:void(0);" class="close">重试</a></div>' +
+                 '</div>',
+        mask: 'mask-dark',
+        onClose: function() { window.location.reload(); }
+      });
+    },
+    /*
+     * 服务器错误提示消息
+     */
+    renderServerErrorMsg: function(message) {
+      message = message ? message : '无法访问应用市场，请稍后再试。';
+
+      this.renderMsg({
+        message: '<div class="msg">' +
+                   '<div class="content">' + message + '</div>' +
+                   '<div class="operate"><a href="javascript:void(0);" class="close">重试</a></div>' +
+                 '</div>',
+        onClose: function() { window.location.reload(); }
+      });
+    },
+    /*
+     * 安装卸载应用失败提示消息
+     */
+    renderOperateErrorMsg: function(message, onClose) {
+      message = message ? message : '操作失败，请稍后再试。';
+
+      this.renderMsg({
+        message: '<div class="msg">' +
+                   '<div class="content">' + message + '</div>' +
+                   '<div class="operate"><a href="javascript:void(0);" class="close">重试</a></div>' +
+                 '</div>',
+        onClose: onClose
+      });
+    },
+    /*
      * 安装应用提示消息 UI
      */
     renderSetupMsg: function(message) {
       var mask = $('#mask');
 
-      var msgHTML = '<div class="msg"><ul class="app2sinan">' +
-        '<li class="left" style="background-image:url(' + message.logo + ')"></li>' +
-          '<li class="middle"></li>' +
-          '<li class="right"></li>' +
-        '</ul>' +
+      var msgHTML = '<div class="msg">' +
+        // '<ul class="app2sinan">' +
+        //   '<li class="left" style="background-image:url(' + message.logo + ')"></li>' +
+        //   '<li class="middle"></li>' +
+        //   '<li class="right"></li>' +
+        // '</ul>' +
         '<div class="content">' + message.content + '</div>' +
         '<div class="operate"><a href="javascript:void(0);" class="close">好的</a></div>' +
       '</div>';

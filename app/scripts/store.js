@@ -1,6 +1,17 @@
 
 define(['storeApi', 'storeUI', 'flexslider', 'scrollstop'], function(storeApi, storeUI){
 
+  /*
+   * 检查网络
+   */
+  var outLine = function() {
+    if(navigator.onLine == false) { // 未联网
+      storeUI.renderOutLineMsg();
+      return true;
+    }
+    return false;
+  };
+
   return {
     /*
      * 应用市场首页
@@ -22,9 +33,13 @@ define(['storeApi', 'storeUI', 'flexslider', 'scrollstop'], function(storeApi, s
         }
       });
 
+      if(outLine()) return;
+
       // 应用列表
       storeApi.getAppList().then(function(data) {
         storeUI.renderAppList(data);
+      }, function() {
+        storeUI.renderServerErrorMsg();
       })
       .then(function(data) {
         console.log(data)
@@ -35,6 +50,9 @@ define(['storeApi', 'storeUI', 'flexslider', 'scrollstop'], function(storeApi, s
      * 我的应用列表页
      */
     store_myapps_page: function() {
+
+      if(outLine()) return;
+
       storeApi.getMyAppList().then(function(data) {
         storeUI.renderMyAppList(data);
       });
@@ -44,8 +62,13 @@ define(['storeApi', 'storeUI', 'flexslider', 'scrollstop'], function(storeApi, s
      * 应用市场详情页
      */
     store_app_page: function(appId) {
+
+      if(outLine()) return;
+
       storeApi.getApp(appId).then(function(data) {
         storeUI.renderAppDetail(data);
+      }, function() {
+        storeUI.renderServerErrorMsg();
       });
     }
   };
