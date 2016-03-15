@@ -33,5 +33,25 @@ define({
     date.setTime(date.getTime() + day * 24 * 60 * 60);
 
     document.cookie = key + '=' + value + ';expires=' + date.toGMTString();
+  },
+
+  /*
+   * 字节单位 换算为 目标单位 X
+   */
+  bytesToX: function(value) {
+    var K = 1024;
+
+    if(value == 0) { // 0 B
+      return '0 K';
+    } else {
+      // 目标单位
+      var X = ['B', 'K', 'M', 'G', 'T', 'PB', 'EB', 'ZB', 'YB'];
+      // 计算近似冪值
+      var power = Math.floor(Math.log(value) / Math.log(K));
+      // 最多保留一位小数
+      var result = Math.round(value / Math.pow(K, power) * 10) / 10;
+
+      return result + ' ' + X[power];
+    }
   }
 });

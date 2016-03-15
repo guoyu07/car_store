@@ -1,5 +1,5 @@
 
-define(['const', 'storeAction'], function($const, storeAction) {
+define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
 
   var server = $const.server;
 
@@ -126,7 +126,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
               '<div class="app-info">' +
                 '<div class="app-name">' + app.name + '</div>' +
                 '<div class="app-version">版本 ' + app.version_name + '</div>' +
-                '<div class="app-size">' + app.softsize + ' M</div>' +
+                '<div class="app-size">' + utils.bytesToX(app.softsize) + '</div>' +
               '</div></a>' +
               '<div class="app-operate">' +
                 '<a href="javascript:void(0);" class="' + operate[app.status][0] + '">' + operate[app.status][1] + '</a>' +
@@ -172,7 +172,7 @@ define(['const', 'storeAction'], function($const, storeAction) {
           '<div class="app-info">' +
           '<div class="app-name">' + data.name + '</div>' +
           '<div class="app-version">版本 ' + data.version_name + '</div>' +
-          '<div class="app-size">' + data.softsize + ' M</div>' +
+          '<div class="app-size">' + utils.bytesToX(data.softsize) + '</div>' +
         '</div>' +
         '<div class="app-operate">' +
           '<a href="javascript:void(0);" class="' + operate[data.status][0] + '">' + operate[data.status][1] + '</a>' +

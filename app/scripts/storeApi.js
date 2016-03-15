@@ -8,7 +8,7 @@ define(['const', 'utils'], function($const, utils) {
 
   if(hostname == '0.0.0.0' || hostname == 'localhost') {
     utils.setCookie('sn', '11cfc8d5effe9b84d318be0687c9cd61');
-    utils.setCookie('access_token', 'f6aeab5b0e7d3d9315105eddd99609a2');
+    utils.setCookie('access_token', '0222537c44a6c0066bd3680eb1b5cb2c');
   }
 
   // var sn = '8469e2920a239a83192eff5313abab82';
