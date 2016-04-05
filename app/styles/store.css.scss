@@ -277,13 +277,13 @@ $app-info-padding: 48 / 1080 * 100%;
   }
 
   section.store-app-screenshots {
-    overflow: scroll;
     min-height: px2em((520 / 3 * 1px), $default-font-size); /* COMPATIBLE CODE */
     min-height: (520 / 3) / $default-vw2px * 1vw;
-    padding: $app-info-padding;
     border-top: 1px solid #313a3a;
 
     ul {
+      overflow: scroll;
+      padding: $app-info-padding;
       list-style: none;
       font-size: 0px;
       white-space: nowrap;

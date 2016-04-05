@@ -36,12 +36,11 @@ define(function(require, exports, module) {
    */
   var uninstallAction = function(target, metadata) {
     var id = metadata.id;
+    var storeUI = require('storeUI');
 
     storeApi.uninstall(id).then(function(data) {
-      target.closest('li').addClass('fadeOutLeft slideUp');
+      storeUI.removeMyApp(target.closest('li'));
     }, function() {
-      var storeUI = require('storeUI');
-
       storeUI.renderOperateErrorMsg('卸载失败，请稍后再试。', function() {
         // 模拟点击卸载
         setTimeout(function() {

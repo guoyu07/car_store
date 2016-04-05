@@ -52,7 +52,7 @@ define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
 
       screenshots.animate({
         'scrollLeft': scrollLeft + delta
-      }, 300, function() {
+      }, 400, function() {
         complete && complete.call();
       });
     } else {
@@ -109,9 +109,12 @@ define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
      */
     renderMyAppList: function(data) {
       var myAppList = $('#myAppList');
+      var myAppsInfo = $('#myAppsInfo');
 
       if(data && data.length) {
         clearMyAppList(myAppList);
+
+        myAppsInfo.removeClass('visible');
 
         data.map(function(app) {
           app.status = 'true'; // 只有唯一状态
@@ -148,6 +151,8 @@ define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
         });
 
         myAppList.click(storeAction.operateAction);
+      } else {
+        myAppsInfo.addClass('visible');
       }
     },
 
@@ -197,7 +202,7 @@ define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
           });
           appScreenshots.html('<ul>' + appScreenshotsHTML + '</ul>');
 
-          appScreenshots.bind('scrollstop', function handler() {
+          appScreenshots.children('ul').bind('scrollstop', function handler() {
             var self = $(this);
 
             self.unbind('scrollstop');
@@ -319,6 +324,23 @@ define(['const', 'utils', 'storeAction'], function($const, utils, storeAction) {
           .addClass(operate[new_status][0])
           .removeClass(operate[old_status][0]);
       }, millisec);
+    },
+
+    /*
+     * 移除 我的应用列表的应用
+     */
+    removeMyApp: function(app) {
+      app.addClass('fadeOutLeft slideUp js-hidden');
+
+      var myAppList = $('#myAppList');
+
+      // 若列表为空 则显示提示信息
+      if(myAppList.find('li:not(.js-hidden)').length == 0) {
+        // 延迟显示
+        setTimeout(function() {
+          $('#myAppsInfo').addClass('visible');
+        }, 1000);
+      }
     }
   }
 });

@@ -2,13 +2,12 @@
 define(['const', 'utils'], function($const, utils) {
 
   var server = $const.server;
-  var server1 = 'http://172.16.10.91:8080';
 
   var hostname = window.location.hostname;
 
-  if(hostname == '0.0.0.0' || hostname == 'localhost') {
+  if(utils.identifyIPv4(hostname) || hostname == 'localhost') {
     utils.setCookie('sn', '11cfc8d5effe9b84d318be0687c9cd61');
-    utils.setCookie('access_token', '0222537c44a6c0066bd3680eb1b5cb2c');
+    utils.setCookie('access_token', '7d8d4103df2517ce96c6742fb8863f8d');
   }
 
   // var sn = '8469e2920a239a83192eff5313abab82';
@@ -54,7 +53,7 @@ define(['const', 'utils'], function($const, utils) {
     getAppList: function() {
       /*
       $.ajax({
-        url: server1 + '/Sinan/api/v1/apps.json',
+        url: server + '/Sinan/api/v1/apps.json',
         type: 'get',
         dataType: 'json',
         xhrFields: {

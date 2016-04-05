@@ -4,6 +4,19 @@
  */
 define({
   /*
+   * 识别 IPv4 地址
+   */
+  identifyIPv4: function(str) {
+    var result = str.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+
+    if(result != null &&
+      result[1] <= 255 && result[2] <= 255 &&
+      result[3] <= 255 && result[4] <= 255) {
+        return true;
+    }
+    return false;
+  },
+  /*
    * 获取 url 参数
    */
   getURLParam: function(name) {
